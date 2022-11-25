@@ -12,7 +12,7 @@
 
       $row = mysqli_fetch_assoc($result_username);
       if(password_verify($password, $row["password"])){
-        header("Location: dashboard.php");
+        header("Location:dashboard.php");
         exit;
       };
     }
