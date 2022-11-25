@@ -1,0 +1,40 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+img {
+  width: 30%;
+  background-color: white;
+  border-radius: 100%;
+  margin-bottom: 10px;
+}
+a {
+  display: block;
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  background-color: aliceblue;
+  color: #ad61c8;
+  transition: 1s;
+  padding-left: 10px;
+}
+.aksi {
+  box-sizing: border-box;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+@media (max-width: 600px) {
+  img {
+    margin-bottom: 30px;
+  }
+  .aksi {
+    gap: 2px;
+    box-sizing: border-box;
+    height: 100px;
+  }
+}
