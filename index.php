@@ -1,25 +1,5 @@
 <?php 
-  $conn = mysqli_connect("localhost","root","","db_oso");
-  if(isset($_POST["login"])){
-    global $conn;
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-
-    $result_username = mysqli_query($conn, "SELECT * FROM log_admin WHERE user = '$username'");
-    
-
-    if(mysqli_num_rows($result_username) === 1){
-
-      $row = mysqli_fetch_assoc($result_username);
-      if(password_verify($password, $row["password"])){
-        header("Location:dashboard.php");
-        exit;
-      };
-    }
-
-    $error = true;
-  }
-
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,12 +7,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="Style/login.css" />
     <script src="assets/js/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
     <link rel="stylesheet" href="assets/login.css">
+    <style>
+      card {
+        height: max-content;
+      }
+    </style>
     <title>Login</title>
   </head> 
   <body style="width: 100%">
@@ -55,7 +39,7 @@
                   <i class="fa-solid fa-user-plus"></i>
                 </button>
               </form>
-              <button title="Silahkan Masuk Kaka 🥰" type="submit" class="btn btn-success" id="login">Login</button>
+              <button title="Silahkan Masuk Kaka 🥰" type="submit" class="btn btn-success" id="submit" name="submit">Login</button>
             </div>
           </div>
         </div>

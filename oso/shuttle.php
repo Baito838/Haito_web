@@ -33,16 +33,14 @@
       
       <div style="background-color: #CE8AE2;" class="offcanvas offcanvas-start text-light" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
         <div class="offcanvas-header">
-        <h3>Dashboard <i class="fa-light fa-chart-network"></i></h3>
+          <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"><h5>Database OSO</h5> <i class="fa-solid fa-house"></i></h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-flex justify-content-between flex-column">
-          <div class="pr-2 pl-2">
-
-            <h5>Database OSO</h5>
+          <div class="p-2">
             <ul type="square" class="text-light">
-              <li><a href="kampus.php">Kampus</a></li>
-              <li><a href="shuttle.php">Shuttle</a></li>
+              <li><a href="/haito_web/dashboard.php">Dashboard </a></li>
+              <li><a href="index.php">OSO</a></li>
             </ul>
           </div>
           </div>
