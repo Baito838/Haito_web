@@ -2,7 +2,7 @@
 
 $conn = mysqli_connect("localhost","root","","db_oso");
 
-$result = mysqli_query($conn, 'SELECT COUNT(nama) AS nama FROM tp_shuttle'); 
+$result = mysqli_query($conn, 'SELECT COUNT(nama) AS nama FROM tp_shuttle,'); 
 $row = mysqli_fetch_assoc($result); 
 $count = $row['nama'];
 
@@ -65,7 +65,7 @@ if ($count >= 0 || $count <= 25){
                 <div class="card-body">
                     <div class="d-flex w-100 justify-content-between align-content-center">
                         <div>
-                            <p title="Pelanggan OSO" style="font-size: 25px; cursor: pointer;"><?= " Total : ". $count?></p>
+                            <p title="Pelanggan OSO" style="font-size: 25px; cursor: pointer;"><?= " Total : ". $count;?></p>
                         </div>
                         <div style="font-size: 25px;">
                             <?= $emot;?>

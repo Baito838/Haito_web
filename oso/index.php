@@ -27,6 +27,11 @@ $totalk = number_format($row1['total_k'], 0, ".", ".");
     <script src="https://kit.fontawesome.com/308efbf9d4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/style.css">
     <title>OSO</title>
+    <style>
+        section {
+            margin: 0;
+        }
+    </style>
 
 </head>
 
@@ -37,10 +42,12 @@ $totalk = number_format($row1['total_k'], 0, ".", ".");
             <img style="background-color: white;" src="image/Logo Toko.png" />
         </div>
         <form action="shuttle.php">
-            <div class="d-flex w-100 justify-content-evenly gap-lg-5 card-isi">
-                <div class="card" style="width: 18rem">
+            <div class="d-flex w-100 card-isi justify-content-evenly gap-lg-5">
+                <div class="card d-flex flex-column" style="width: 18rem">
+                    <div class="d-flex w-100 justify-content-between flex-fill" >
                     <img src="image/1.jpg" class="card-img-top" alt="" />
-                    <div class="card-body d-flex w-100 justify-content-between align-content-center mt-lg-3">
+                    </div>
+                    <div class="card-body d-flex w-100 justify-content-between align-content-center mt-lg-3 flex-fill">
                         <div class="">
                             <b>Perhari <?= "Rp. " . $totals . ",-" ?></b>
                         </div>
@@ -52,10 +59,11 @@ $totalk = number_format($row1['total_k'], 0, ".", ".");
         </form>
 
         <form action="kampus.php">
-            <div class="d-flex w-100 justify-content-evenly gap-lg-5 card-isi">
-                <div class="card" style="width: 18rem">
+                <div class="card d-flex flex-column" style="width: 18rem">
+                    <div class="d-flex w-100 justify-content-between flex-fill">
                     <img src="image/2.jpg" style="background-color: #F5E931;" class="card-img-top" alt="..." />
-                    <div class="card-body d-flex w-100 justify-content-between align-content-center mt-lg-3">
+                    </div>
+                    <div class="card-body d-flex w-100 justify-content-between align-content-center mt-lg-3 flex-fill">
                         <div class="">
                             <b>Perhari <?= "Rp. " . $totalk . ",-" ?></b>
                         </div>
@@ -66,6 +74,32 @@ $totalk = number_format($row1['total_k'], 0, ".", ".");
                 </div>
             </div>
         </form>
+        <hr style="display: block;">
+        <div class="card" style="margin: 0 30px;">
+            <div class="card-header">
+                <h2>Total Seleruh Pendapatan</h2>
+            </div>
+            <div class="card-body">
+             <table class="table text-center">
+                 <thead>
+                    <th>Tanggal</th>
+                    <th>Shuttle</th>
+                    <th>Kampus</th>
+                    <th>Seller</th>
+                    <th>Lain_lain</th>
+                    <th>Total</th>
+                 </thead>
+                 <tbody>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                 </tbody>
+             </table>
+            </div>
+        </div>
     </section>
 
     <footer></footer>

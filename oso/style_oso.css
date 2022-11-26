@@ -10,17 +10,30 @@ img {
   border-radius: 100%;
   margin-bottom: 10px;
 }
+nav {
+  visibility: hidden;
+  position: absolute;
+}
 a {
   display: block;
   color: white;
   text-decoration: none;
 }
 a:hover {
-  background-color: aliceblue;
+  background-color: ffffff;
   color: #ad61c8;
   transition: 1s;
   padding-left: 10px;
 }
+
+h5 {
+  background-color: #CE8AE2;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
 .aksi {
   box-sizing: border-box;
   height: 100px;
@@ -29,6 +42,10 @@ a:hover {
   gap: 3px;
 }
 @media (max-width: 600px) {
+  nav {
+    display: block;
+    visibility: visible;
+  }
   img {
     margin-bottom: 30px;
   }

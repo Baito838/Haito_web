@@ -1,5 +1,8 @@
 <?php
 $conn = mysqli_connect("localhost", "root", "", "db_oso");
+$result = mysqli_query($conn, 'SELECT SUM(total_kampus) AS value_sum FROM tp_kampus');
+$row = mysqli_fetch_assoc($result);
+$sum = number_format($row['value_sum'], 0, ".", ".");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,14 +16,85 @@ $conn = mysqli_connect("localhost", "root", "", "db_oso");
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
   <link rel="stylesheet" href="style_oso.css">
-  <title>OSO Kampus</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+    }
+
+    nav {
+      display: none;
+      visibility: hidden;
+    }
+
+    aside {
+      position: fixed;
+      top: -5px;
+      z-index: 999;
+      height: 105vh;
+      width: 300px;
+      background-color: #CE8AE2;
+    }
+
+    .box {
+      position: relative;
+      top: -40px;
+      margin: 0 20px 0 320px;
+    }
+
+    @media (max-width: 600px) {
+
+      .box {
+        margin: 0;
+      }
+
+      aside {
+        display: none;
+        visibility: hidden;
+      }
+
+      nav {
+        display: block;
+        visibility: visible;
+      }
+
+      img {
+        margin-bottom: 30px;
+      }
+    }
+
+    @media (max-width: 1000px) {
+
+      .box {
+        top: 0;
+        margin: 0;
+      }
+
+      aside {
+        display: none;
+        visibility: hidden;
+      }
+
+      nav {
+        display: block;
+        visibility: visible;
+      }
+
+      img {
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+  <title>OSO</title>
 </head>
 
-<body style="background-color: #C8A2C8;">
+<body>
 
   <nav class="navbar sticky-top d-flex justify-content-between p-2" style="background-color: #AD61C8; box-sizing: border-box;">
     <div>
-      <h2 class="text-light">OSO <i class="fa-solid fa-chart-simple"></i></h2>
+      <h2 class="text-light">OSO<i class="fa-solid fa-chart-simple"></i></h2>
     </div>
     <div>
       <button style="background-color: #C8A2C8;" class="btn mr-4 text-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
@@ -31,7 +105,7 @@ $conn = mysqli_connect("localhost", "root", "", "db_oso");
     <div style="background-color: #CE8AE2;" class="offcanvas offcanvas-start text-light" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
-          <h5>Database OSO</h5> <i class="fa-solid fa-house"></i>
+          <h5>Database OSO</h5></i>
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
@@ -50,14 +124,18 @@ $conn = mysqli_connect("localhost", "root", "", "db_oso");
     </div>
   </nav>
 
-  <div class="box" style="margin: 0px 20px;">
+  <aside>
+
+  </aside>
+
+  <div class="box">
     <form method="post" action="">
       <div class="card">
         <div class="card-header bg-success text-center text-capitalize">
           <h1 style="color: white">Kampus</h1>
         </div>
         <div class="card-body">
-          <div style="display:flex; justify-content: space-between;" class="mb-3">
+          <div style="display:flex; justify-content: space-between; align-items: center;" class="mb-3">
             <div>
               <button title="Tambah Pelanggan 💾" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">
                 <i class="fa-solid fa-user-plus"></i>
@@ -66,12 +144,16 @@ $conn = mysqli_connect("localhost", "root", "", "db_oso");
                 <i class="fa-solid fa-arrows-rotate"></i>
               </button>
             </div>
+            <div style="margin-top: 10px;">
+              <h5><?php echo "Total Rp. " . $sum; ?></h5>
+            </div>
           </div>
           <div style="overflow-x:auto;">
             <table class="table table-striped table-light table-responsive-md text-center align-middle">
               <thead class="thead-dark">
                 <th style="display: none;">No</th>
                 <th>Nama</th>
+                <th>Bayar</th>
                 <th>Taso</th>
                 <th>Gorengan</th>
                 <th>Total</th>
@@ -88,6 +170,9 @@ $conn = mysqli_connect("localhost", "root", "", "db_oso");
                   <td style="display: none;"><?= $no++ ?></td>
                   <td class="text-center">
                     <?= $data["nama"] ?>
+                  </td>
+                  <td style="justify-content: center; align-items: center;">
+                    <input type="checkbox" class="form-check-input" id="flexSwitchCheckDefault">
                   </td>
                   <td class="text-center">
                     <?= "Rp " . number_format($data["taso"], 0, ".", ".");
@@ -181,19 +266,8 @@ $conn = mysqli_connect("localhost", "root", "", "db_oso");
 <?php
               endwhile; ?>
 
-<?php
-$result = mysqli_query($conn, 'SELECT SUM(total_kampus) AS value_sum FROM tp_kampus');
-$row = mysqli_fetch_assoc($result);
-$sum = number_format($row['value_sum'], 0, ".", ".");
-?>
-<tfoot class="table-success">
-  <td colspan="3" class="text-center">Total Pendapatan Sehari</td>
-  <td>
-    <?php echo "Rp " . $sum; ?>
-  </td>
-  <td>
-  </td>
-</tfoot>
+
+
 </table>
 </div>
 </div>
