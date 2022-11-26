@@ -2,7 +2,7 @@
 
 $conn = mysqli_connect("localhost","root","","db_oso");
 
-$result = mysqli_query($conn, 'SELECT COUNT(nama) AS nama FROM tp_shuttle,'); 
+$result = mysqli_query($conn, "SELECT COUNT(nama) AS nama FROM tp_shuttle"); 
 $row = mysqli_fetch_assoc($result); 
 $count = $row['nama'];
 

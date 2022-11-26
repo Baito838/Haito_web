@@ -14,17 +14,6 @@ nav {
   visibility: hidden;
   position: absolute;
 }
-a {
-  display: block;
-  color: white;
-  text-decoration: none;
-}
-a:hover {
-  background-color: ffffff;
-  color: #ad61c8;
-  transition: 1s;
-  padding-left: 10px;
-}
 
 h5 {
   background-color: #CE8AE2;

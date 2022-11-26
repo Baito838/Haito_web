@@ -44,6 +44,19 @@ $sum = number_format($row['value_sum'], 0, ".", ".");
       margin: 0 20px 0 320px;
     }
 
+    a {
+      color: fff;
+      padding: 5px 10px;
+      border-radius: 10px 0px 0px 10px;
+    }
+
+    a:hover {
+      margin-left: 30px;
+      color: #CE8AE2;
+      background-color: white;
+      transition: 1.2s;
+    }
+
     @media (max-width: 600px) {
 
       .box {
@@ -92,9 +105,9 @@ $sum = number_format($row['value_sum'], 0, ".", ".");
 
 <body>
 
-  <nav class="navbar sticky-top d-flex justify-content-between p-2" style="background-color: #AD61C8; box-sizing: border-box;">
+<nav class="navbar sticky-top d-flex justify-content-between p-2" style="background-color: #AD61C8; box-sizing: border-box; display: none; visibility: none;">
     <div>
-      <h2 class="text-light">OSO<i class="fa-solid fa-chart-simple"></i></h2>
+      
     </div>
     <div>
       <button style="background-color: #C8A2C8;" class="btn mr-4 text-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
@@ -105,34 +118,59 @@ $sum = number_format($row['value_sum'], 0, ".", ".");
     <div style="background-color: #CE8AE2;" class="offcanvas offcanvas-start text-light" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
-          <h5>Database OSO</h5></i>
+          <h5>Navigasi</h5></i>
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body d-flex justify-content-between flex-column">
         <div class="p-2">
-          <ul type="square" class="text-light">
-            <li><a href="/haito_web/dashboard.php">Dashboard </a></li>
-            <li><a href="index.php">OSO</a></li>
+          <ul type="none" class="text-light">
+            <li>
+              <h4> <a href="index.php">Dashboard </a></h4>
+            </li>
+            <li>
+              <h4> <a href="shuttle.php">Shuttle</a></h4>
+            </li>
+            <li>
+              <h4> <a href="kampus.php">Kampus</a></h4>
+            </li>
+            <li>
+              <h4> <a href="total.php">Total</a></h4>
+            </li>
           </ul>
         </div>
-      </div>
-      <div class="d-flex justify-content-center">
-        <img src="image/Haito Store Transparan.png" alt="">
       </div>
     </div>
     </div>
   </nav>
 
   <aside>
-
+    <div style="margin: 30px 0px; display: flex; justify-content: center;">
+      <h1 style="color: white;">Navigasi</h1>
+    </div>
+    <div>
+      <ul type="none" class="text-light">
+        <li>
+          <h4> <a href="index.php">Dashboard </a></h4>
+        </li>
+        <li>
+          <h4> <a href="shuttle.php">Shuttle</a></h4>
+        </li>
+        <li>
+          <h4> <a href="kampus.php">Kampus</a></h4>
+        </li>
+        <li>
+          <h4> <a href="total.php">Total</a></h4>
+        </li>
+      </ul>
+    </div>
   </aside>
 
   <div class="box">
     <form method="post" action="">
       <div class="card">
         <div class="card-header bg-success text-center text-capitalize">
-          <h1 style="color: white">Kampus</h1>
+          <h1 style="color: white">KAMPUS</h1>
         </div>
         <div class="card-body">
           <div style="display:flex; justify-content: space-between; align-items: center;" class="mb-3">

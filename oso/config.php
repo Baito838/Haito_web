@@ -19,7 +19,7 @@ if (isset($_POST['tambah_kvp'])) {
               </script>";
     } elseif ($simpan) {
         echo "<script>
-                alert('Simpan Berhasil Disimpan 💾');
+                alert('Data Berhasil Disimpan 💾');
                 document.location='shuttle.php';
             </script>";
     }
@@ -104,7 +104,7 @@ if (isset($_POST['tambah_mhs'])) {
               </script>";
     } elseif ($simpan_mhs) {
         echo "<script>
-                alert('Simpan Berhasil Disimpan 💾');
+                alert('Data Berhasil Disimpan 💾');
                 document.location='kampus.php';
             </script>";
     }
@@ -166,6 +166,49 @@ if (isset($_POST['clear_mhs'])) {
         echo "<script>
                 alert('Data Table Tidak Berhasil DiHapus !');
                 document.location='kampus.php';
+            </script>";
+    }
+}
+
+if (isset($_POST['okey'])) {
+    global $conn;
+    $tgl = $_POST['tgl'];
+    $shuttle = $_POST['shuttle'];
+    $kampus = $_POST['kampus'];
+    $seller = $_POST['seller'];
+    $lain = $_POST['lain_lain'];
+    $total_oso = $_POST['total_oso'];
+
+    $simpan_total = mysqli_query($conn, "INSERT INTO `totaloso` (`idt`, `tanggal`, `shuttle`, `kampus`, `seller`, `lain`, `total`, `clear`) VALUES (NULL, '$tgl', '$shuttle', '$kampus', '$seller', '$lain', '$total_oso', '1');");
+
+    if ($_POST = 0) {
+        echo "<script>
+                alert('Data Tidak Boleh Kosong !');
+                document.location='index.php';
+              </script>";
+    } elseif ($simpan_total) {
+        echo "<script>
+                alert('Data Berhasil Disimpan 💾');
+                document.location='index.php';
+            </script>";
+    }
+}
+
+
+if (isset($_POST['truncate'])) {
+    global $conn;
+
+    $truncate = mysqli_query($conn, "TRUNCATE TABLE totaloso");
+
+    if ($truncate) {
+        echo "<script>
+                alert('Data Table Berhasil DiHapus');
+                document.location='index.php';
+              </script>";
+    } else {
+        echo "<script>
+                alert('Data Table Tidak Berhasil DiHapus !');
+                document.location='index.php';
             </script>";
     }
 }
