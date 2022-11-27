@@ -1,14 +1,14 @@
-<?php 
+<?php
 
-$conn = mysqli_connect("localhost","root","","db_oso");
+$conn = mysqli_connect("localhost", "root", "", "db_oso");
 
-$result = mysqli_query($conn, "SELECT COUNT(nama) AS nama FROM tp_shuttle"); 
-$row = mysqli_fetch_assoc($result); 
+$result = mysqli_query($conn, "SELECT COUNT(nama) AS nama FROM tp_shuttle");
+$row = mysqli_fetch_assoc($result);
 $count = $row['nama'];
 
-if ($count >= 0 || $count <= 25){
+if ($count >= 0 || $count <= 25) {
     $emot = "💪";
-} elseif($count >= 26 || $count <= 50){
+} elseif ($count >= 26 || $count <= 50) {
     $emot = "🏃‍♂️";
 }
 ?>
@@ -39,12 +39,13 @@ if ($count >= 0 || $count <= 25){
             color: white;
         }
 
-        .btn-logo{
-            z-index: 999;
-            position: absoulte;
-            top: -300px;
+        .card:hover {
+            transform: scale(1.1);
+            transition: 2s;
         }
-
+        section {
+            margin: 0;
+        }
     </style>
     <title>Dashboard</title>
 </head>
@@ -52,72 +53,28 @@ if ($count >= 0 || $count <= 25){
 <body>
     <img src="image/header.png" width="100%" class="bg" />
     <form action="oso/index.php">
-    <section>
-        <div class="logo">
-            <img src="image/Logo Toko.png" />
-        </div>
-        <div class="d-flex w-100 justify-content-evenly gap-lg-5 card-isi">
-            <div class="card" style="width: 18rem">
-                <img src="image/1.png" class="card-img-top" alt="..." />
-                <div class="d-flex w-100 justify-content-center ">
-                    <button class="btn-logo btn btn-primary" type="submit"><b>OSO</b></button>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex w-100 justify-content-between align-content-center">
-                        <div>
-                            <p title="Pelanggan OSO" style="font-size: 25px; cursor: pointer;"><?= " Total : ". $count;?></p>
-                        </div>
-                        <div style="font-size: 25px;">
-                            <?= $emot;?>
-                        </div>
-                    </div>
-                    <div>
+        <section>
+            <div class="logo">
+                <img src="image/Logo Toko.png" />
+            </div>
+            <div class="d-flex w-100 justify-content-evenly gap-lg-5 card-isi">
 
+
+                <a href="oso/index.php">
+                    <div class="card" style="width: 18rem; height: 300px;">
+                        <img src="image/1.png" class="card-img-top" alt="..." />
                     </div>
+                </a>
+
+                <div class="card" style="width: 18rem">
+                    <img src="image/2.png" class="card-img-top" alt="..." />
+                </div>
+
+                <div class="card" style="width: 18rem">
+                    <img src="image/3.png" class="card-img-top" alt="..." />
                 </div>
             </div>
-
-            <div class="card" style="width: 18rem">
-                <img src="image/2.png" class="card-img-top" alt="..." />
-                <div class="card-body">
-                    <div>
-                        <a href=""><button class="btn">Dashboard</button></a>
-                    </div>
-                    <div class="d-flex w-100 justify-content-between">
-                        <div>
-                            <p style="font-size: 25px;">Pelanggan</p>
-                        </div>
-                        <div class="card-text">
-                            <i style="color: gray;" class="fa-solid fa-users fa-2xl"></i>
-                        </div>
-                    </div>
-                    <div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" style="width: 18rem">
-                <img src="image/3.png" class="card-img-top" alt="..." />
-                <div class="card-body">
-                    <div>
-                        <a href=""><button class="btn">Dashboard</button></a>
-                    </div>
-                    <div class="d-flex w-100 justify-content-between">
-                        <div>
-                            <p style="font-size: 25px;">Pelanggan</p>
-                        </div>
-                        <div class="card-text">
-                            <i style="color: gray;" class="fa-solid fa-users fa-2xl"></i>
-                        </div>
-                    </div>
-                    <div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
     </form>
 
     <footer></footer>

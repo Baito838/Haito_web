@@ -1,5 +1,20 @@
 <?php 
- 
+$conn = mysqli_connect("localhost", "root", "", "db_oso");
+
+if(isset($_POST['login'])){
+  $user = $_POST['username'];
+  $pass = $_POST['password'];
+
+  $ress = mysqli_query($conn, "SELECT * FROM log_admin WHERE user = '$user'");
+
+  if(mysqli_num_rows($ress) === 1){
+    $ruw = mysqli_fetch_assoc($ress);
+    if (password_verify($pass, $ruw['pass'])) {
+      header("Location : dashboard.php");
+      exit;
+    }
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +54,7 @@
                   <i class="fa-solid fa-user-plus"></i>
                 </button>
               </form>
-              <button title="Silahkan Masuk Kaka 🥰" type="submit" class="btn btn-success" id="submit" name="submit">Login</button>
+              <button title="Silahkan Masuk Kaka 🥰" type="submit" class="btn btn-success" id="login" name="login">Login</button>
             </div>
           </div>
         </div>

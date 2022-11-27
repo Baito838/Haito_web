@@ -1,8 +1,17 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "db_oso");
+include 'koneksi.php';
 $result = mysqli_query($conn, 'SELECT SUM(total) AS value_sum FROM totaloso');
 $row = mysqli_fetch_assoc($result);
 $sum = number_format($row['value_sum'], 0, ".", ".");
+
+$result3 = mysqli_query($conn, 'SELECT SUM(total_shuttle) AS total_s FROM tp_shuttle');
+$row3 = mysqli_fetch_assoc($result3);
+$totals = $row3['total_s'];
+
+$result4 = mysqli_query($conn, 'SELECT SUM(total_kampus) AS total_k FROM tp_kampus');
+$row4 = mysqli_fetch_assoc($result4);
+$totalk = $row4['total_k'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +54,9 @@ $sum = number_format($row['value_sum'], 0, ".", ".");
         }
 
         a {
-            color: fff;
+            display: block;
+            text-decoration: none;
+            color: white;
             padding: 5px 10px;
             border-radius: 10px 0px 0px 10px;
         }
@@ -125,7 +136,7 @@ $sum = number_format($row['value_sum'], 0, ".", ".");
 
     <nav class="navbar sticky-top d-flex justify-content-between p-2" style="background-color: #AD61C8; box-sizing: border-box; display: none; visibility: none;">
         <div>
-            
+
         </div>
         <div>
             <button style="background-color: #C8A2C8;" class="btn mr-4 text-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
@@ -135,9 +146,9 @@ $sum = number_format($row['value_sum'], 0, ".", ".");
 
         <div style="background-color: #CE8AE2;" class="offcanvas offcanvas-start text-light" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
-                    <h5>Navigasi</h5></i>
-                </h5>
+                <h1 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+                    <h1 style="color: white;">Navigasi</h1>
+                </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body d-flex justify-content-between flex-column">
@@ -197,13 +208,12 @@ $sum = number_format($row['value_sum'], 0, ".", ".");
                 </div>
                 <div class="card-body">
                     <div style="display:flex; justify-content: space-between; align-items: center;" class="mb-3">
-                        <form action="config.php" method="post">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                <i class="fa-solid fa-money-bill-trend-up" style="color: fff"></i>
-                            </button>
-                            <button type="submit" class="btn btn-warning" id="truncate" name="truncate"><i class="fa-solid fa-eraser" style="color: fff;"></i></i>
-                            </button>
-                        </form>
+                        <button title="Total Pendapatan Sehari" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <i class="fa-solid fa-money-bill-trend-up" style="color: white"></i>
+                        </button>
+                        <button title="Kosongkang Tabel Setelah 30 hari" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#truncate">
+                            <i class="fa-solid fa-ban"></i>
+                        </button>
                     </div>
                     <div style="overflow-x:auto;">
                         <table class="table table-striped table-light table-responsive-md text-center align-middle">
@@ -215,6 +225,7 @@ $sum = number_format($row['value_sum'], 0, ".", ".");
                                 <th>Seller</th>
                                 <th>Lain_lain</th>
                                 <th>Total</th>
+                                <th>Aksi</th>
                             </thead>
                             <?php
                             global $conn;
@@ -230,7 +241,34 @@ $sum = number_format($row['value_sum'], 0, ".", ".");
                                     <td><?= "Rp. " . number_format($toso["seller"], 0, ".", ".") ?></td>
                                     <td><?= "Rp. " . number_format($toso["lain"], 0, ".", ".") ?></td>
                                     <td><?= "Rp. " . number_format($toso["total"], 0, ".", ".") ?></td>
+                                    <td>
+                                        <button title="Hapus Data" type="button" class="btn mb-3 btn-danger" data-bs-toggle="modal" data-bs-target="#hapus_total<?= $i ?>">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tbody>
+
+                                <div class="modal fade" id="hapus_total<?= $i ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-danger text-center">
+                                                <h2 class="modal-title text-white" id="staticBackdropLabel">Hapus Data</h2>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="post" action="config.php">
+                                                    <input type="hidden" name="idt" id="idt" value="<?= $toso['idt'] ?>">
+                                                    <h4>Yakin ingin menghapus Data ?</h4>
+
+                                            </div>
+                                            <form action="config.php" method="post">
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i></button>
+                                                    <button type="submit" class="btn btn-danger" name='hapus_total' id='hapus_total'><i class="fa-solid fa-trash"></i></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php endwhile; ?>
                         </table>
                     </div>
@@ -248,24 +286,64 @@ $sum = number_format($row['value_sum'], 0, ".", ".");
                     </div>
                     <form action="config.php" method="POST">
                         <div class="modal-body">
-                            <label for="nama" class="mb-1">Tanggal</label>
-                            <input required oninvalid="this.setCustomValidity('Wajib masukkan tanggal')" oninput="this.setCustomValidity('')" class="form-control mb-2" type="date" name="tgl" id="tgl" />
-                            <label for="shuttle" class="mb-1">Shuttle</label>
-                            <input readonly class="form-control mb-2" type="number" name="shuttle" id="shuttle" value="<?= $row['total_s'] ?>" />
-                            <label for="kampus" class="mb-1">Kampus</label>
-                            <input readonly class="form-control mb-2" type="number" name="kampus" id="kampus" value="<?= $row1['total_k'] ?>" />
-                            <label for="seller" class="mb-1">Seller</label>
-                            <input readonly class="form-control mb-2" type="number" name="seller" id="seller" value="0" />
-                            <label for="lain_lain" class="mb-1">Lain-lain</label>
-                            <input readonly class="form-control mb-2" type="number" name="lain_lain" id="lain_lain" value="0" />
-                            <label for="refresh" class="mb-1">Refresh</label>
-                            <input class="form-control mb-2" type="number" name="refresh" id="refresh" max="1" min="0" />
+                            <div><h6 style="color: red; background-color: #FFCA2C; padding: 5px 10px; border-radius: 5px; text-align: center;">Setelah Total Harian ditambahkan otomatis total kampus, shuttle, seller dan lain-lain akan dikosongkan</h6></div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="nama" class="mb-1">Tanggal</label>
+                                    <input title="Masukkan tanggal pendapatan" required oninvalid="this.setCustomValidity('Wajib masukkan tanggal')" oninput="this.setCustomValidity('')" class="form-control mb-2" type="date" name="tgl" id="tgl" />
+                                </div>
+                                <div class="col">
+                                    <label for="refresh" class="mb-1">Refresh</label>
+                                    <input title="kembalikan ke nilai 0" required oninvalid="this.setCustomValidity('Resfresh untuk merespon total')" oninput="this.setCustomValidity('')" class="form-control mb-2" type="number" name="refresh" id="refresh" max="1" min="0" placeholder="Refresh untuk respon total"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="shuttle" class="mb-1">Shuttle</label>
+                                    <input readonly class="form-control mb-2" type="number" name="shuttle" id="shuttle" value="<?= $row3['total_s'] ?>" />
+                                </div>
+                                <div class="col">
+                                    <label for="kampus" class="mb-1">Kampus</label>
+                                    <input readonly class="form-control mb-2" type="number" name="kampus" id="kampus" value="<?= $row4['total_k'] ?>" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="seller" class="mb-1">Seller</label>
+                                    <input readonly class="form-control mb-2" type="number" name="seller" id="seller" value="0" />
+                                </div>
+                                <div class="col">
+                                    <label for="lain_lain" class="mb-1">Lain-lain</label>
+                                    <input readonly class="form-control mb-2" type="number" name="lain_lain" id="lain_lain" value="0" />
+                                </div>
+                            </div>
                             <label for="total">Total</label>
                             <input readonly type="number" class="form-control mb-2" name="total_oso" id="total_oso">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark" style="color: fff;"></i></button>
                             <button type="submit" class="btn btn-success" id="okey" name="okey"><i class="fa-solid fa-floppy-disk" style="color: fff;"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal Truncate -->
+        <div class="modal fade" id="truncate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="config.php" method="POST">
+                        <div class="modal-header" style="background-color: #CE8AE2;">
+                            <h2 class="modal-title" id="staticBackdropLabel" style="color: white;">Kosongkan Table</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h4>Pastikan Data Table Mencapai 30 hari lalu Masukkan Pada PDF, Baru Lakukan Pengosongan Table</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Batal</button>
+                            <button id="kosongkan" name="kosongkan" type="submit" class="btn btn-danger">Kosongkan</button>
                         </div>
                     </form>
                 </div>

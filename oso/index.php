@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "db_oso");
+include 'koneksi.php';
 
 $result = mysqli_query($conn, 'SELECT SUM(total_shuttle) AS total_s FROM tp_shuttle');
 $row = mysqli_fetch_assoc($result);

@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "db_oso");
+include 'koneksi.php';
 $result = mysqli_query($conn, 'SELECT SUM(total_kampus) AS value_sum FROM tp_kampus');
 $row = mysqli_fetch_assoc($result);
 $sum = number_format($row['value_sum'], 0, ".", ".");
@@ -45,7 +45,9 @@ $sum = number_format($row['value_sum'], 0, ".", ".");
     }
 
     a {
-      color: fff;
+      display: block;
+      text-decoration: none;
+      color: white;
       padding: 5px 10px;
       border-radius: 10px 0px 0px 10px;
     }
@@ -117,9 +119,9 @@ $sum = number_format($row['value_sum'], 0, ".", ".");
 
     <div style="background-color: #CE8AE2;" class="offcanvas offcanvas-start text-light" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
-          <h5>Navigasi</h5></i>
-        </h5>
+      <h1 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+          <h1 style="color: white;">Navigasi</h1>
+        </h1>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body d-flex justify-content-between flex-column">
